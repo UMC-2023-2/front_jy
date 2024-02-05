@@ -1,0 +1,173 @@
+//
+//  TableViewCell.swift
+//  tabbarcustom
+//
+//  Created by 신지연 on 2024/01/28.
+//
+
+import UIKit
+import SnapKit
+
+class TableViewCell: UITableViewCell {
+    
+    
+    private let productImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = .back01
+        imageView.layer.cornerRadius = 10
+        imageView.clipsToBounds = true
+        return imageView
+    }()
+    
+    private let albumTitleView: UILabel = {
+        let titleView = UILabel()
+        titleView.text = "제목입니다."
+        titleView.font = UIFont(name: "Pretendard-Bold", size: 16)
+        titleView.textColor = .white
+        titleView.clipsToBounds = true
+        return titleView
+    }()
+    
+    private let friendInfoView: UIView = {
+        let view = UIView()
+        
+        return view
+    }()
+    
+    private let friendTxtView: UILabel = {
+        let titleView = UILabel()
+        titleView.text = "홍길동"
+        titleView.font = UIFont(name: "Pretendard", size: 12)
+        titleView.textColor = .white
+        titleView.clipsToBounds = true
+        return titleView
+    }()
+    
+    private let circleTxtView: UILabel = {
+        let titleView = UILabel()
+        titleView.text = "·"
+        titleView.font = UIFont(name: "Pretendard", size: 12)
+        titleView.textColor = .white
+        titleView.clipsToBounds = true
+        return titleView
+    }()
+    
+    private let dividerView: UILabel = {
+        let titleView = UILabel()
+        titleView.text = "|"
+        titleView.font = UIFont(name: "Pretendard", size: 12)
+        titleView.textColor = .white
+        titleView.clipsToBounds = true
+        return titleView
+    }()
+    
+    private let photoIconView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = .icoImg
+        imageView.clipsToBounds = true
+        imageView.tintColor = .white
+        return imageView
+    }()
+    
+    private let photoNum: UILabel = {
+        let titleView = UILabel()
+        titleView.text = "20"
+        titleView.font = UIFont(name: "Pretendard", size: 12)
+        titleView.textColor = .white
+        titleView.clipsToBounds = true
+        return titleView
+    }()
+    
+    private let moreButton: UIButton = {
+        let button = UIButton(type: .system)
+        // 이미지에 시스템에서 제공하는 ellipsis 사용
+        let ellipsisImage = UIImage(systemName: "ellipsis")
+        button.setImage(ellipsisImage, for: .normal)
+        button.tintColor = .white
+        return button
+    }()
+
+    private func configureForAlbumType(isSharedAlbum: Bool, friendcount: Int) {
+        if isSharedAlbum {
+            // 공유 앨범이면
+            
+            contentView.addSubview(friendInfoView)
+            friendInfoView.snp.makeConstraints { make in
+                make.top.equalTo(albumTitleView.snp.bottom).offset(8)  //
+                make.leading.equalTo(albumTitleView.snp.leading)  // 앨범 타이틀 레이블과 세로 중앙 정렬
+            }
+            
+            contentView.addSubview(friendTxtView)
+            friendTxtView.snp.makeConstraints { make in
+                make.centerX.equalTo(friendInfoView.snp.centerX)
+                make.leading.equalTo(friendInfoView.snp.leading)
+            }
+            
+            //친구 2명이상이면 circleTxtView와 친구 추가...
+        }
+    }
+    
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        // content view에 이미지 뷰 추가
+        contentView.addSubview(productImageView)
+        contentView.addSubview(albumTitleView)
+        contentView.addSubview(moreButton)
+        contentView.addSubview(photoIconView)
+        contentView.addSubview(photoNum)
+        
+        // SnapKit을 사용하여 제약 조건 설정
+        productImageView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(20)  // 왼쪽에서 20px 떨어지게
+            make.centerY.equalToSuperview()  // 세로 중앙 정렬
+            make.top.equalToSuperview().offset(10)
+            make.bottom.equalToSuperview().offset(-10)
+            make.width.equalTo(productImageView.snp.height)
+        }
+        
+        albumTitleView.snp.makeConstraints { make in
+            make.leading.equalTo(productImageView.snp.trailing).offset(20)  // imageView로부터 오른쪽으로 10px 떨어져 있음
+            make.top.equalToSuperview().offset(20)  // superview의 위쪽 가장자리보다 10px 아래로 떨어져 있음
+            make.height.equalTo(20)
+            make.trailing.equalTo(moreButton.snp.leading).offset(-12)  // 오른쪽 가장자리는 moreButton의 왼쪽 가장자리보다 12px 왼쪽에 위치함
+        }
+        
+        
+        photoIconView.snp.makeConstraints { make in
+            make.leading.equalTo(productImageView.snp.trailing).offset(20)
+            make.top.equalTo(albumTitleView.snp.bottom).offset(5)
+            make.height.equalTo(18)
+            make.width.equalTo(photoIconView.snp.height)  // 오른쪽 가장자리는 moreButton의 왼쪽 가장자리보다 12px 왼쪽에 위치함
+        }
+        
+        photoNum.snp.makeConstraints { make in
+            make.centerY.equalTo(photoIconView.snp.centerY)
+            make.height.equalTo(18)
+            make.leading.equalTo(photoIconView.snp.trailing).offset(5)
+        }
+        
+        moreButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.height.equalTo(20)
+            make.width.equalTo(productImageView.snp.height)
+        }
+        
+        // 셀의 배경색을 투명하게 설정
+        self.backgroundColor = UIColor.clear
+        self.contentView.backgroundColor = UIColor.clear
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        // content view의 크기를 조정하여 이미지 뷰의 위치와 크기를 조절
+        contentView.frame = bounds
+    }
+
+}
