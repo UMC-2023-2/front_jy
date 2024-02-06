@@ -72,6 +72,8 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
         return view
     }()
+    
+    
         
     @objc private func changeUnderLinePosition() {
         let segmentIndex = CGFloat(tabbarTop.selectedSegmentIndex)
@@ -183,10 +185,18 @@ class ViewController: UIViewController {
         }
     }
     
+    private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 150
+        return layout
+    }()
+    
     private lazy var collectionView: UICollectionView = {
-        let layout = CVControllerLayout()
-        
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        //let layout = CVControllerLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
+        //let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -228,8 +238,11 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
         tableView.snp.remakeConstraints { make in
-                    make.edges.equalToSuperview()
-                }
+            make.top.bottom.equalToSuperview()
+            //make.leading.equalToSuperview().offset(24)
+            //make.trailing.equalToSuperview().offset(-24)
+            make.leading.trailing.equalToSuperview()
+        }
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.reloadData()
@@ -316,18 +329,31 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let navTitleView = UIView(frame: CGRect(x: 0, y: 0, width: 136, height: 24))
+        navTitleView.addSubview(tabbarTop)
+        navTitleView.addSubview(underLineView)
+        tabbarTop.snp.makeConstraints { make in
+            make.centerY.equalTo(navTitleView)
+            make.top.equalTo(navTitleView.snp.top)
+        }
+        underLineView.snp.makeConstraints { make in
+            make.centerY.equalTo(navTitleView)
+            make.top.equalTo(tabbarTop.snp.bottom).offset(2)
+        }
+        //navTitleView.
+        
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: .icoSearch, style: .plain, target: self, action: #selector(searchButtonTapped))
         self.navigationItem.rightBarButtonItem?.tintColor = .gray300
         //UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
-        
+        //self.navigationItem.titleView = navTitleView//tabbarTop
         /*
         let backBarButtonItem = UIBarButtonItem(image: .icoLineArrowLeft, style: .plain, target: self, action: nil)
         backBarButtonItem.tintColor = .gray900  // 색상 변경
         self.navigationItem.backBarButtonItem = backBarButtonItem
          */
         
-        
+        //self.view.addSubview(navTitleView)
         self.view.addSubview(self.bgimage)
         self.view.addSubview(self.blurView)
         self.view.addSubview(self.topView)
@@ -352,14 +378,17 @@ class ViewController: UIViewController {
         self.topView.snp.makeConstraints { make in
             make.top.equalTo(blurView.snp.top)
             make.width.equalToSuperview()
-            make.height.equalTo(92)
+            //make.height.equalTo(100)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(10)
+            //make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             
         }
         
         self.tabbarTop.snp.makeConstraints{ make in
             make.centerX.equalToSuperview()
-            
-            make.top.equalToSuperview().offset(30)
+            //make.bottom.equalTo(topView.snp.bottom).offset(-10)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(-10)
+            //make.top.equalToSuperview().offset(30)
             make.width.equalTo(156)
             make.height.equalTo(24)
         }
@@ -371,7 +400,7 @@ class ViewController: UIViewController {
             make.leading.equalTo(tabbarTop.snp.leading)
             
         }
-        
+         
         self.mainView.snp.makeConstraints{ make in
             make.top.equalTo(topView.snp.bottom)
             make.bottom.equalToSuperview()
@@ -379,7 +408,7 @@ class ViewController: UIViewController {
         }
         
         self.footerView.snp.makeConstraints{ make in
-            make.height.equalTo(104)
+            make.height.equalToSuperview().dividedBy(8)
             make.bottom.equalTo(mainView.snp.bottom)
             make.width.equalTo(mainView.snp.width)
         }
@@ -407,8 +436,18 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 86
+        return 78
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let curationViewController = CurationViewController()
+        navigationController?.pushViewController(curationViewController, animated: true)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    
   
 }
 
@@ -428,7 +467,9 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // 각 셀의 크기를 반환
         print(collectionView.frame.width)
-        return CGSize(width: 327, height: 463)
+        let screenHeight = UIScreen.main.bounds.height
+        let collectionViewHeight = (screenHeight * 5) / 7
+        return CGSize(width: 327, height: collectionViewHeight)
         
     }
     

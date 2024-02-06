@@ -32,6 +32,7 @@
 		F4C847202B66BBEB006F4F26 /* CVControllerLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C8471F2B66BBEA006F4F26 /* CVControllerLayout.swift */; };
 		F4C847242B6A4E48006F4F26 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C847232B6A4E48006F4F26 /* SearchViewController.swift */; };
 		F4C847672B6FD190006F4F26 /* PhotoCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C847662B6FD190006F4F26 /* PhotoCardCollectionViewCell.swift */; };
+		F4C847692B713587006F4F26 /* CurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C847682B713587006F4F26 /* CurationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		F4C8471F2B66BBEA006F4F26 /* CVControllerLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVControllerLayout.swift; sourceTree = "<group>"; };
 		F4C847232B6A4E48006F4F26 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		F4C847662B6FD190006F4F26 /* PhotoCardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCardCollectionViewCell.swift; sourceTree = "<group>"; };
+		F4C847682B713587006F4F26 /* CurationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 				F4C8471F2B66BBEA006F4F26 /* CVControllerLayout.swift */,
 				F4C847232B6A4E48006F4F26 /* SearchViewController.swift */,
 				F4C847662B6FD190006F4F26 /* PhotoCardCollectionViewCell.swift */,
+				F4C847682B713587006F4F26 /* CurationViewController.swift */,
 			);
 			path = tabbarcustom;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				F4C846402B5E82C7006F4F26 /* ViewController.swift in Sources */,
 				F4C846E02B667769006F4F26 /* TableViewCell.swift in Sources */,
 				F4C8463C2B5E82C7006F4F26 /* AppDelegate.swift in Sources */,
+				F4C847692B713587006F4F26 /* CurationViewController.swift in Sources */,
 				F4C847672B6FD190006F4F26 /* PhotoCardCollectionViewCell.swift in Sources */,
 				F4C847202B66BBEB006F4F26 /* CVControllerLayout.swift in Sources */,
 				F4C8463E2B5E82C7006F4F26 /* SceneDelegate.swift in Sources */,

@@ -19,7 +19,7 @@ class SearchViewController: UIViewController {
     
     let contentView: UIView = {
         let view = UIView()
-        view.backgroundColor = .gray300
+        view.backgroundColor = .clear
         return view
         
     }()
@@ -40,10 +40,14 @@ class SearchViewController: UIViewController {
         button.setTitle("전체 삭제", for: .normal)
         button.titleLabel?.font = UIFont(name: "Pretendard", size: 14)
         button.tintColor = .gray700
+        
+        button.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
+         
+        
         return button
     }()
     
-    let collectionViewFlowLayout: UICollectionViewFlowLayout = {
+    private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumInteritemSpacing = 0
@@ -57,11 +61,62 @@ class SearchViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(PhotoCardCollectionViewCell.self, forCellWithReuseIdentifier: "PhotoCardCollectionViewCell")
-        collectionView.backgroundColor = .yellow
+        collectionView.backgroundColor = .clear
         
         return collectionView
     }()
     
+    //키워드
+    let keywordBtn: UIButton = {
+        let button = UIButton(type: .system)
+        
+        return button
+    }()
+    
+    //팝업뷰
+    
+    @objc func deleteButtonTapped() {
+            // 팝업 내용 추가
+        // 팝업 띄우기 또는 검색어 삭제 등의 동작 수행
+            let alertController = UIAlertController(title: "검색어를 삭제하시겠습니까?", message: "삭제 클릭시 최근 검색어가 삭제됩니다.", preferredStyle: .alert)
+            
+            // 확인 버튼 추가
+            let confirmAction = UIAlertAction(title: "삭제", style: .destructive) { [weak self] _ in
+                guard let self = self else { return }
+                // 팝업 확인 시 동작할 내용 구현
+                // 예를 들어, 검색어 삭제 등의 로직 수행
+                cardContent.removeFromSuperview()
+                btnDeleteCompletely.removeFromSuperview()
+                self.updateContentViewForRecentContentNone()
+            }
+            alertController.addAction(confirmAction)
+            
+            // 취소 버튼 추가
+            let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            
+            // 팝업 화면에 띄우기
+            present(alertController, animated: true, completion: nil)
+        
+        /*
+            popUpView.addSubview(cancelBtn)
+            closeButton.snp.makeConstraints { make in
+                make.width.equalTo(128)
+                make.height.equalTo(42)
+            }
+            
+            // 팝업을 화면에 추가
+            view.addSubview(closeBtn)
+            popupView.snp.makeConstraints { make in
+                make.width.equalTo(128)
+                make.height.equalTo(42)
+                make.center.equalToSuperview()
+                make.width.equalTo(301)
+                make.height.equalTo(164)
+            }
+         
+         */
+        }
     
     private func updateContentViewForRecentContent() {
         print("최근검색한 사진")
@@ -85,6 +140,8 @@ class SearchViewController: UIViewController {
             make.leading.trailing.bottom.equalTo(contentView)
             
         }
+        
+        
         
     }
     
@@ -118,6 +175,7 @@ class SearchViewController: UIViewController {
         
         
     }
+    
     
     
     
@@ -187,7 +245,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // Return the size for each cell
-        return CGSize(width: 166, height: 218)
+        return CGSize(width: 166, height: 248)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

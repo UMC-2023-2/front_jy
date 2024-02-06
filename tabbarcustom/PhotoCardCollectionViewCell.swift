@@ -38,6 +38,20 @@ class PhotoCardCollectionViewCell: UICollectionViewCell {
         return button
     }()
     
+    let keywordView: UIView = {
+       let label = UILabel()
+        label.backgroundColor = .pointLight
+        label.textColor = .pointNormal
+        label.text = "3D인물"
+        label.font = UIFont(name: "Pretendard", size: 12)
+        label.layer.cornerRadius = 13
+        label.textAlignment = .center
+        label.layer.masksToBounds = true
+        label.setContentHuggingPriority(.required, for: .horizontal)
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
+        return label
+    }()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,11 +83,19 @@ class PhotoCardCollectionViewCell: UICollectionViewCell {
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(4)
-            make.bottom.equalToSuperview()
+            make.top.equalTo(photoImage.snp.bottom).offset(8)
             make.width.equalTo(158)
             make.height.equalTo(44)
         }
         
+        addSubview(keywordView)
+        keywordView.snp.makeConstraints { make in
+            make.height.equalTo(26)
+            make.width.equalTo(56)
+            make.bottom.equalToSuperview()
+            make.leading.equalToSuperview().offset(6)
+            
+        }
         
         
         layer.masksToBounds = true

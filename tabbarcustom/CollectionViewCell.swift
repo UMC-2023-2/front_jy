@@ -20,7 +20,7 @@ class CollectionViewCell: UICollectionViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "HELLO"
+        label.text = "미묘한 사진 앨범"
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         label.textColor = .white
         return label

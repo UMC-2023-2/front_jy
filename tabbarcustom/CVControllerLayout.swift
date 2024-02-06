@@ -79,8 +79,8 @@ class CVControllerLayout: UICollectionViewFlowLayout {
         if attributes.indexPath.item != -1 {
                 ratio = 1.0
             }
-        print("collectionView.frame.size.height")
-        print(collectionView.frame.size.height)
+        //print("collectionView.frame.size.height")
+        //print(collectionView.indexPath
         
         let alpha = ratio * (1 - self.sideItemAlpha) + self.sideItemAlpha
         let scale = ratio * (1 - self.sideItemScale) + self.sideItemScale
