@@ -117,6 +117,58 @@ class CurationViewController: UIViewController, UITextFieldDelegate {
         return collectionView
     }()
     
+    //noneContent
+    private lazy var noneContentView: UIView = {
+        let ncView = UIView()
+        
+        
+        
+        // Text Label 추가
+        let textLabel = UILabel()
+        ncView.addSubview(textLabel)
+        textLabel.text = "앨범에 사진이 없습니다."
+        textLabel.textColor = .gray500
+        textLabel.font = UIFont(name: "Pretendard", size: 14)
+        textLabel.textAlignment = .center
+        textLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+            
+            make.height.equalTo(22)
+        }
+        
+        // 이미지뷰 추가
+        let imageView = UIImageView()
+        imageView.image = .icoImg
+        ncView.addSubview(imageView)
+        imageView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(textLabel.snp.top).offset(-8) // text label과의 간격 조절
+            make.height.equalTo(46)
+            make.width.equalTo(imageView.snp.height)
+        }
+        
+        // 버튼 추가
+        let addPhotoBtn = UIButton(type: .system)
+        ncView.addSubview(addPhotoBtn)
+        addPhotoBtn.setTitle("사진 추가하기", for: .normal)
+        addPhotoBtn.layer.cornerRadius = 21
+        addPhotoBtn.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(textLabel.snp.bottom).offset(10) // text label과의 간격 조절
+            make.width.equalTo(165) // 가로 길이와 동일하게
+            make.height.equalTo(42) // 높이는 30px로
+        }
+        addPhotoBtn.setTitleColor(.gray500, for: .normal)
+        addPhotoBtn.backgroundColor = UIColor.clear
+        addPhotoBtn.layer.borderWidth = 1.0
+        addPhotoBtn.layer.borderColor = UIColor.gray500.cgColor
+        
+        addPhotoBtn.addTarget(self, action: #selector(didTappedAddPhotoBtn), for: .touchUpInside)
+        
+        return ncView
+    }()
+    
     
     
     
@@ -179,10 +231,51 @@ class CurationViewController: UIViewController, UITextFieldDelegate {
             make.top.equalTo(contentView.snp.top).offset(38)
             make.leading.trailing.bottom.equalTo(contentView)
             
-            
+        }
+        
+    }
+    
+    
+    private func updateContentViewForEmpty() {
+        
+        contentView.subviews.forEach { $0.removeFromSuperview() }
+        
+        contentView.addSubview(titleContent)
+        contentView.addSubview(btnFilter)
+        contentView.addSubview(textFilter)
+        contentView.addSubview(noneContentView)
+        
+        titleContent.snp.remakeConstraints { make in
+            make.leading.equalTo(contentView.snp.leading).offset(4)
+            make.top.equalTo(contentView.snp.top)
+        }
+        
+        btnFilter.snp.makeConstraints { make in
+            make.centerY.equalTo(titleContent)
+            make.trailing.equalTo(contentView)
+            make.width.height.equalTo(14)
+        }
+        
+        textFilter.snp.makeConstraints { make in
+            make.trailing.equalTo(btnFilter.snp.leading)
+            make.centerY.equalTo(btnFilter)
+        }
+        
+        noneContentView.snp.makeConstraints { make in
+            make.top.equalTo(contentView.snp.top).offset(38)
+            make.leading.trailing.bottom.equalTo(contentView)
             
         }
         
+        
+        contentView.addSubview(noneContentView)
+        
+    }
+    
+    @objc func didTappedAddPhotoBtn() {
+        let addPhotoViewController = AddPhotoViewController()
+        
+        navigationController?.pushViewController(addPhotoViewController, animated: true)
     }
     
     
@@ -244,7 +337,8 @@ class CurationViewController: UIViewController, UITextFieldDelegate {
         
         
         loadTopView()
-        loadContentView()
+        //loadContentView()
+        updateContentViewForEmpty()
     }
     
     

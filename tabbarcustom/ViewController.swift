@@ -328,7 +328,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        /*
         let navTitleView = UIView(frame: CGRect(x: 0, y: 0, width: 136, height: 24))
         navTitleView.addSubview(tabbarTop)
         navTitleView.addSubview(underLineView)
@@ -340,6 +340,7 @@ class ViewController: UIViewController {
             make.centerY.equalTo(navTitleView)
             make.top.equalTo(tabbarTop.snp.bottom).offset(2)
         }
+         */
         //navTitleView.
         
         
