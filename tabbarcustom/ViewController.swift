@@ -3,8 +3,8 @@ import SnapKit
 
 class ViewController: UIViewController {
     
+    // MARK: - Properties
     
-
     let bgimage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "back01") // "back01"은 사용하고자 하는 이미지의 이름으로 변경해주세요.
@@ -18,17 +18,7 @@ class ViewController: UIViewController {
         return visualEffectView
     }()
     
-    
-    
-    // MARK: - head
-    
-    //네비게이션 바 만들기
-    let navigationBar : UINavigationBar = {
-        let navigationBar = UINavigationBar()
-        navigationBar.translatesAutoresizingMaskIntoConstraints = false
-        return navigationBar
-    }()
-    
+    //head
     let topView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
@@ -74,116 +64,12 @@ class ViewController: UIViewController {
     }()
     
     
-        
-    @objc private func changeUnderLinePosition() {
-        let segmentIndex = CGFloat(tabbarTop.selectedSegmentIndex)
-        
-        // mainView 내용 업데이트
-        switch segmentIndex {
-        case 0: // "추억 앨범"
-            updateMainViewForMemoriesAlbum()
-        case 1: // "함께 앨범"
-            updateMainViewForTogetherAlbum()
-        default:
-            break
-        }
-        
-        // underLineView 위치 업데이트
-        let segmentWidth = tabbarTop.frame.width / CGFloat(tabbarTop.numberOfSegments)
-        let newLeadingDistance = segmentWidth * segmentIndex
-        
-        
-        underLineView.snp.updateConstraints { make in
-            make.leading.equalTo(tabbarTop.snp.leading).offset(newLeadingDistance)
-        }
-        
-        UIView.animate(withDuration: 0.2) { [weak self] in
-                self?.view.layoutIfNeeded()
-            }
-    }
-    
-    private func updateMainViewForMemoriesAlbum() {
-        // "추억 앨범"에 대한 mainView 업데이트 로직 작성
-        mainView.backgroundColor = .clear
-        print("추억앨범")
-        
-        
-    }
-    
-    private func updateMainViewForTogetherAlbum() {
-        // "함께 앨범"에 대한 mainView 업데이트 로직 작성
-        mainView.backgroundColor = .clear
-        print("함께앨범")
-    }
-    
-    /*
-    let searchButton: UIButton = {
-        let button = UIButton()
-       return button
-    }()
-    
-    
-    
-    func setupSearchButton() {
-        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
-        navigationItem.rightBarButtonItem = searchButton
-        }
-    
-   */
-    
-    // MARK: - body
+    // body
     let mainView : UIView = {
         let view = UIView()
         view.backgroundColor = .clear
         return view
     }()
-    
-    
-    // MARK: - foot
-    let footerView : UIView = {
-       let view = UIView()
-        view.backgroundColor = .clear
-        return view
-    }()
-    
-    let toggleBtnBottom : UISegmentedControl = {
-        let segment = UISegmentedControl()
-        
-        segment.layer.cornerRadius = 20
-        segment.backgroundColor = UIColor.darkGray
-        
-        segment.setBackgroundImage(UIImage(), for: .normal, barMetrics: .default)
-        segment.setDividerImage(UIImage(), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
-        
-        segment.insertSegment(withTitle: "카드 형식", at: 0, animated: true)
-        segment.insertSegment(withTitle: "리스트 형식", at: 1, animated: true)
-        
-        segment.selectedSegmentIndex = 0
-        
-        // 선택 되어 있지 않을때
-        segment.setTitleTextAttributes([
-            NSAttributedString.Key.foregroundColor: UIColor.lightGray,
-            NSAttributedString.Key.font: UIFont(name: "Pretendard-Medium", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .regular)
-        ], for: .normal)
-        
-        // 선택 되었을때 폰트 및 폰트컬러
-        segment.setTitleTextAttributes([
-            NSAttributedString.Key.foregroundColor: UIColor.white,
-            NSAttributedString.Key.font: UIFont(name: "Pretendard-Bold", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .regular)
-        ], for: .selected)
-        
-        segment.addTarget(self, action: #selector(toggleBtnBottomTapped), for: .valueChanged)
-        
-        return segment
-    }()
-    
-    @objc private func toggleBtnBottomTapped() {
-        if toggleBtnBottom.selectedSegmentIndex == 0 {
-            updateMainViewForCardStyle()
-        } else {
-            updateMainViewForListStyle()
-        }
-    }
     
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -201,58 +87,14 @@ class ViewController: UIViewController {
         return collectionView
     }()
     
-    private func updateMainViewForCardStyle() {
-        print("카드뷰")
-        
-        mainView.subviews.forEach { $0.removeFromSuperview() }
-        mainView.addSubview(collectionView)
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: "CollectionViewCell")
-        collectionView.snp.remakeConstraints { make in
-                    make.edges.equalToSuperview()
-                }
-        collectionView.backgroundColor = .clear
-        
-        let indexPath = IndexPath(item: 0, section: 0)
-        let yOffset = collectionView.frame.size.height / 2
-        collectionView.scrollToItem(at: indexPath, at: .init(rawValue: UInt(yOffset)), animated: false)
-        
-        
-    }
-    
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
-    private func updateMainViewForListStyle() {
-        print("테이블뷰")
-        
-        mainView.subviews.forEach { $0.removeFromSuperview() }
-        mainView.addSubview(tableView)
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
-        tableView.snp.remakeConstraints { make in
-            make.top.bottom.equalToSuperview()
-            //make.leading.equalToSuperview().offset(24)
-            //make.trailing.equalToSuperview().offset(-24)
-            make.leading.trailing.equalToSuperview()
-        }
-        tableView.backgroundColor = .clear
-        tableView.separatorStyle = .none
-        tableView.reloadData()
-        //테이블뷰 만드는 코드 추가
-    }
-    
     private lazy var noneContentView: UIView = {
         let ncView = UIView()
-        
-        
         
         // Text Label 추가
         let textLabel = UILabel()
@@ -295,9 +137,91 @@ class ViewController: UIViewController {
         makeAlbumButton.layer.borderWidth = 1.0
         makeAlbumButton.layer.borderColor = UIColor.white.cgColor
         
-        
         return ncView
     }()
+
+    
+    
+    // footer
+    let footerView : UIView = {
+       let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    
+    let toggleBtnBottom : UISegmentedControl = {
+        let segment = UISegmentedControl()
+        
+        segment.layer.cornerRadius = 20
+        segment.backgroundColor = UIColor.darkGray
+        
+        segment.setBackgroundImage(UIImage(), for: .normal, barMetrics: .default)
+        segment.setDividerImage(UIImage(), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
+        
+        segment.insertSegment(withTitle: "카드 형식", at: 0, animated: true)
+        segment.insertSegment(withTitle: "리스트 형식", at: 1, animated: true)
+        
+        segment.selectedSegmentIndex = 0
+        
+        // 선택 되어 있지 않을때
+        segment.setTitleTextAttributes([
+            NSAttributedString.Key.foregroundColor: UIColor.lightGray,
+            NSAttributedString.Key.font: UIFont(name: "Pretendard-Medium", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .regular)
+        ], for: .normal)
+        
+        // 선택 되었을때 폰트 및 폰트컬러
+        segment.setTitleTextAttributes([
+            NSAttributedString.Key.foregroundColor: UIColor.white,
+            NSAttributedString.Key.font: UIFont(name: "Pretendard-Bold", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .regular)
+        ], for: .selected)
+        
+        segment.addTarget(self, action: #selector(toggleBtnBottomTapped), for: .valueChanged)
+        
+        return segment
+    }()
+    
+    
+
+    //MARK: - Functions
+    
+    private func updateMainViewForCardStyle() {
+        print("카드뷰")
+        
+        mainView.subviews.forEach { $0.removeFromSuperview() }
+        mainView.addSubview(collectionView)
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: "CollectionViewCell")
+        collectionView.snp.remakeConstraints { make in
+                    make.edges.equalToSuperview()
+                }
+        collectionView.backgroundColor = .clear
+        collectionView.reloadData()
+    
+            }
+    
+        
+    private func updateMainViewForListStyle() {
+        print("테이블뷰")
+        
+        mainView.subviews.forEach { $0.removeFromSuperview() }
+        mainView.addSubview(tableView)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
+        tableView.snp.remakeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+        }
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
+        tableView.reloadData()
+        
+    }
+    
+    
     
     private func updateMainViewForEmpty() {
         print("정보없음")
@@ -305,16 +229,70 @@ class ViewController: UIViewController {
         mainView.subviews.forEach { $0.removeFromSuperview() }
         mainView.addSubview(noneContentView)
         
-        
         noneContentView.snp.remakeConstraints { make in
                     make.edges.equalToSuperview()
                 }
         noneContentView.backgroundColor = .clear
-        
     }
     
     
-
+    private func updateMainViewForMemoriesAlbum() {
+        // "추억 앨범"에 대한 mainView 업데이트 로직 작성
+        //mainView.backgroundColor = .clear
+        print("추억앨범")
+        
+    }
+    
+    private func updateMainViewForTogetherAlbum() {
+        // "함께 앨범"에 대한 mainView 업데이트 로직 작성
+        //mainView.backgroundColor = .clear
+        print("함께앨범")
+    }
+    
+    
+    // underlineView 옮기기 + 추억앨범/함께앨범
+    @objc private func changeUnderLinePosition() {
+        let segmentIndex = CGFloat(tabbarTop.selectedSegmentIndex)
+        
+        // mainView 내용 업데이트
+        switch segmentIndex {
+        case 0: // "추억 앨범"
+            updateMainViewForMemoriesAlbum()
+        case 1: // "함께 앨범"
+            updateMainViewForTogetherAlbum()
+        default:
+            break
+        }
+        
+        // underLineView 위치 업데이트
+        let segmentWidth = tabbarTop.frame.width / CGFloat(tabbarTop.numberOfSegments)
+        let newLeadingDistance = segmentWidth * segmentIndex
+        
+        /*
+        underLineView.snp.updateConstraints { make in
+            make.leading.equalTo(tabbarTop.snp.leading).offset(newLeadingDistance)
+        }
+        */
+        underLineView.snp.remakeConstraints { make in
+            make.bottom.equalTo(tabbarTop.snp.bottom).offset(2)
+            make.height.equalTo(2)
+            make.width.equalTo(tabbarTop.snp.width).dividedBy(tabbarTop.numberOfSegments)
+            make.leading.equalTo(tabbarTop.snp.leading).offset(newLeadingDistance)
+        }
+        
+        UIView.animate(withDuration: 0.2) { [weak self] in
+                self?.view.layoutIfNeeded()
+            }
+    }
+    
+    // 카드형식/리스트형식 선택
+    @objc private func toggleBtnBottomTapped() {
+        if toggleBtnBottom.selectedSegmentIndex == 0 {
+            updateMainViewForCardStyle()
+        } else {
+            updateMainViewForListStyle()
+        }
+    }
     
     // 검색 버튼이 눌렸을 때 호출되는 메서드
     @objc func searchButtonTapped() {
@@ -325,36 +303,15 @@ class ViewController: UIViewController {
         navigationController?.pushViewController(searchViewController, animated: true)
     }
     
-    
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        /*
-        let navTitleView = UIView(frame: CGRect(x: 0, y: 0, width: 136, height: 24))
-        navTitleView.addSubview(tabbarTop)
-        navTitleView.addSubview(underLineView)
-        tabbarTop.snp.makeConstraints { make in
-            make.centerY.equalTo(navTitleView)
-            make.top.equalTo(navTitleView.snp.top)
-        }
-        underLineView.snp.makeConstraints { make in
-            make.centerY.equalTo(navTitleView)
-            make.top.equalTo(tabbarTop.snp.bottom).offset(2)
-        }
-         */
-        //navTitleView.
-        
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: .icoSearch, style: .plain, target: self, action: #selector(searchButtonTapped))
         self.navigationItem.rightBarButtonItem?.tintColor = .gray300
-        //UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
-        //self.navigationItem.titleView = navTitleView//tabbarTop
-        /*
-        let backBarButtonItem = UIBarButtonItem(image: .icoLineArrowLeft, style: .plain, target: self, action: nil)
-        backBarButtonItem.tintColor = .gray900  // 색상 변경
-        self.navigationItem.backBarButtonItem = backBarButtonItem
-         */
+        tabbarTop.isUserInteractionEnabled = true
         
-        //self.view.addSubview(navTitleView)
+        
         self.view.addSubview(self.bgimage)
         self.view.addSubview(self.blurView)
         self.view.addSubview(self.topView)
@@ -364,8 +321,10 @@ class ViewController: UIViewController {
         self.view.addSubview(self.underLineView)
         self.view.addSubview(self.toggleBtnBottom)
         
-        //updateMainViewForMemoriesAlbum()
-        updateMainViewForEmpty()
+        
+        updateMainViewForMemoriesAlbum()
+        updateMainViewForCardStyle()
+        //updateMainViewForEmpty()
         
         // SnapKit을 사용하여 제약 설정
         self.bgimage.snp.makeConstraints { make in
@@ -380,7 +339,7 @@ class ViewController: UIViewController {
             make.top.equalTo(blurView.snp.top)
             make.width.equalToSuperview()
             //make.height.equalTo(100)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(10)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(20)
             //make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             
         }
@@ -388,7 +347,7 @@ class ViewController: UIViewController {
         self.tabbarTop.snp.makeConstraints{ make in
             make.centerX.equalToSuperview()
             //make.bottom.equalTo(topView.snp.bottom).offset(-10)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(-10)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(10)
             //make.top.equalToSuperview().offset(30)
             make.width.equalTo(156)
             make.height.equalTo(24)
@@ -426,6 +385,7 @@ class ViewController: UIViewController {
     }
 }
 
+// MARK: - Extension
 extension ViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
@@ -444,7 +404,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         
         let curationViewController = CurationViewController()
         navigationController?.pushViewController(curationViewController, animated: true)
-        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -459,15 +418,12 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? CollectionViewCell else{
-            
             return UICollectionViewCell()
         }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // 각 셀의 크기를 반환
-        print(collectionView.frame.width)
         let screenHeight = UIScreen.main.bounds.height
         let collectionViewHeight = (screenHeight * 5) / 7
         return CGSize(width: 327, height: collectionViewHeight)

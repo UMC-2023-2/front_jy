@@ -63,7 +63,6 @@ class CollectionViewCell: UICollectionViewCell {
     
     private func loadDataForNoSharedAlbum(){
         
-        //let titleInfoView = UIView()
         
         contentView.addSubview(titleInfoView)
         titleInfoView.addSubview(albumTitleView)
