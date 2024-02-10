@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		F4C8463C2B5E82C7006F4F26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C8463B2B5E82C7006F4F26 /* AppDelegate.swift */; };
 		F4C8463E2B5E82C7006F4F26 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C8463D2B5E82C7006F4F26 /* SceneDelegate.swift */; };
-		F4C846402B5E82C7006F4F26 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C8463F2B5E82C7006F4F26 /* ViewController.swift */; };
+		F4C846402B5E82C7006F4F26 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C8463F2B5E82C7006F4F26 /* HomeViewController.swift */; };
 		F4C846432B5E82C7006F4F26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4C846412B5E82C7006F4F26 /* Main.storyboard */; };
 		F4C846452B5E82C9006F4F26 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4C846442B5E82C9006F4F26 /* Assets.xcassets */; };
 		F4C846482B5E82C9006F4F26 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4C846462B5E82C9006F4F26 /* LaunchScreen.storyboard */; };
@@ -34,6 +34,7 @@
 		F4C847692B713587006F4F26 /* CurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C847682B713587006F4F26 /* CurationViewController.swift */; };
 		F4C8476B2B73A27F006F4F26 /* AddPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C8476A2B73A27E006F4F26 /* AddPhotoViewController.swift */; };
 		F4C8476D2B73B6C3006F4F26 /* ImageContainerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C8476C2B73B6C3006F4F26 /* ImageContainerCollectionViewCell.swift */; };
+		F4C847892B74FE89006F4F26 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F4C847882B74FE89006F4F26 /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +58,7 @@
 		F4C846382B5E82C7006F4F26 /* tabbarcustom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tabbarcustom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4C8463B2B5E82C7006F4F26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4C8463D2B5E82C7006F4F26 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F4C8463F2B5E82C7006F4F26 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F4C8463F2B5E82C7006F4F26 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F4C846422B5E82C7006F4F26 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F4C846442B5E82C9006F4F26 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4C846472B5E82C9006F4F26 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -84,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4C847892B74FE89006F4F26 /* Alamofire in Frameworks */,
 				F4C846702B5E8F5C006F4F26 /* SnapKit in Frameworks */,
 				F4C846732B5E963B006F4F26 /* Tabman in Frameworks */,
 			);
@@ -131,10 +133,8 @@
 		F4C8463A2B5E82C7006F4F26 /* tabbarcustom */ = {
 			isa = PBXGroup;
 			children = (
+				F4C8478A2B760D6F006F4F26 /* HomeViewController */,
 				F4C847682B713587006F4F26 /* CurationViewController.swift */,
-				F4C8463F2B5E82C7006F4F26 /* ViewController.swift */,
-				F4C846E12B66A31C006F4F26 /* CollectionViewCell.swift */,
-				F4C846DF2B667768006F4F26 /* TableViewCell.swift */,
 				F4C8463B2B5E82C7006F4F26 /* AppDelegate.swift */,
 				F4C8463D2B5E82C7006F4F26 /* SceneDelegate.swift */,
 				F4C846412B5E82C7006F4F26 /* Main.storyboard */,
@@ -183,6 +183,16 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		F4C8478A2B760D6F006F4F26 /* HomeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F4C8463F2B5E82C7006F4F26 /* HomeViewController.swift */,
+				F4C846E12B66A31C006F4F26 /* CollectionViewCell.swift */,
+				F4C846DF2B667768006F4F26 /* TableViewCell.swift */,
+			);
+			path = HomeViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -202,6 +212,7 @@
 			packageProductDependencies = (
 				F4C8466F2B5E8F5C006F4F26 /* SnapKit */,
 				F4C846722B5E963B006F4F26 /* Tabman */,
+				F4C847882B74FE89006F4F26 /* Alamofire */,
 			);
 			productName = tabbarcustom;
 			productReference = F4C846382B5E82C7006F4F26 /* tabbarcustom.app */;
@@ -278,6 +289,7 @@
 			packageReferences = (
 				F4C8466B2B5E8DF8006F4F26 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				F4C846712B5E963B006F4F26 /* XCRemoteSwiftPackageReference "Tabman" */,
+				F4C847872B74FE89006F4F26 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = F4C846392B5E82C7006F4F26 /* Products */;
 			projectDirPath = "";
@@ -333,7 +345,7 @@
 			files = (
 				F4C846E22B66A31D006F4F26 /* CollectionViewCell.swift in Sources */,
 				F4C847242B6A4E48006F4F26 /* SearchViewController.swift in Sources */,
-				F4C846402B5E82C7006F4F26 /* ViewController.swift in Sources */,
+				F4C846402B5E82C7006F4F26 /* HomeViewController.swift in Sources */,
 				F4C846E02B667769006F4F26 /* TableViewCell.swift in Sources */,
 				F4C8463C2B5E82C7006F4F26 /* AppDelegate.swift in Sources */,
 				F4C847692B713587006F4F26 /* CurationViewController.swift in Sources */,
@@ -705,6 +717,14 @@
 				minimumVersion = 3.0.2;
 			};
 		};
+		F4C847872B74FE89006F4F26 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -717,6 +737,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F4C846712B5E963B006F4F26 /* XCRemoteSwiftPackageReference "Tabman" */;
 			productName = Tabman;
+		};
+		F4C847882B74FE89006F4F26 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4C847872B74FE89006F4F26 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -10,6 +10,9 @@ import SnapKit
 
 class CollectionViewCell: UICollectionViewCell {
     
+    
+    // MARK: - Properties
+    
     private let albumImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = .back01

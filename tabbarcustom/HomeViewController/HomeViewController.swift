@@ -1,9 +1,26 @@
 import UIKit
 import SnapKit
+import PicPick_Resource
+import PicPick_Util
+import Alamofire
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
     
     // MARK: - Properties
+    
+    struct Album: Codable {
+        let result : Int
+        let cur_unit : String
+        let cur_nm: String
+        let ttb: String
+        let tts: String
+        let deal_bas_r : String
+        let bkpr : String
+        let yy_efee_r : String
+        let ten_dd_efee_r : String
+        let kftc_bkpr : String
+        let kftc_deal_bas_r : String
+    }
     
     let bgimage: UIImageView = {
         let imageView = UIImageView()
@@ -386,7 +403,7 @@ class ViewController: UIViewController {
 }
 
 // MARK: - Extension
-extension ViewController: UITableViewDelegate, UITableViewDataSource{
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
@@ -411,7 +428,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
   
 }
 
-extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
