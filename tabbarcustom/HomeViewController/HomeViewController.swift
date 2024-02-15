@@ -1,12 +1,17 @@
 import UIKit
 import SnapKit
-import PicPick_Resource
-import PicPick_Util
+//import PicPick_Resource
+//import PicPick_Util
 import Alamofire
 
 class HomeViewController: UIViewController {
     
-    // MARK: - Properties
+    //유저의 모든 앨범 조회
+    //처음에는 추억앨범 + 카드뷰
+    
+    struct APIResponse: Codable {
+        let res: [Album]
+    }
     
     struct Album: Codable {
         let result : Int
@@ -22,9 +27,14 @@ class HomeViewController: UIViewController {
         let kftc_deal_bas_r : String
     }
     
+    
+    
+    
+    
+    // MARK: - Properties
     let bgimage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "back01") // "back01"은 사용하고자 하는 이미지의 이름으로 변경해주세요.
+        imageView.image = UIImage(named: "back01")
         return imageView
     }()
     
@@ -63,7 +73,7 @@ class HomeViewController: UIViewController {
             NSAttributedString.Key.font: UIFont(name: "Pretendard-Medium", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .init(500))
         ], for: .normal)
         
-        // 선택 되었을때 폰트 및 폰트컬러
+        // 선택 되었을때
         segment.setTitleTextAttributes([
             NSAttributedString.Key.foregroundColor: UIColor.gray300,
             NSAttributedString.Key.font: UIFont(name: "Pretendard-Bold", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .init(rawValue: 700))
@@ -434,9 +444,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? CollectionViewCell else{
-            return UICollectionViewCell()
-        }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? CollectionViewCell else { return UICollectionViewCell() }
+        
+        
         return cell
     }
     

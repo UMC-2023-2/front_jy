@@ -13,7 +13,7 @@ class CollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     
-    private let albumImageView: UIImageView = {
+    var albumImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = .back01
         imageView.contentMode = .scaleAspectFill
@@ -21,7 +21,7 @@ class CollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    private let albumTitleView: UILabel = {
+    var albumTitleView: UILabel = {
         let label = UILabel()
         label.text = "미묘한 사진 앨범"
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
@@ -29,7 +29,7 @@ class CollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private let photoIconView: UIImageView = {
+    var photoIconView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = .icoImg
         imageView.clipsToBounds = true
@@ -37,7 +37,7 @@ class CollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    private let photoNum: UILabel = {
+    var photoNum: UILabel = {
         let titleView = UILabel()
         titleView.text = "20"
         titleView.font = UIFont(name: "Pretendard", size: 12)
@@ -46,7 +46,7 @@ class CollectionViewCell: UICollectionViewCell {
         return titleView
     }()
     
-    private let moreButton: UIButton = {
+    var moreButton: UIButton = {
         let button = UIButton(type: .system)
         // 이미지에 시스템에서 제공하는 ellipsis 사용
         let ellipsisImage = UIImage(systemName: "ellipsis")
@@ -55,7 +55,7 @@ class CollectionViewCell: UICollectionViewCell {
         return button
     }()
     
-    private let titleInfoView: UIView = {
+    var titleInfoView: UIView = {
         let view = UIView()
         
         return view
@@ -65,8 +65,6 @@ class CollectionViewCell: UICollectionViewCell {
     
     
     private func loadDataForNoSharedAlbum(){
-        
-        
         contentView.addSubview(titleInfoView)
         titleInfoView.addSubview(albumTitleView)
         titleInfoView.addSubview(photoIconView)
@@ -112,7 +110,6 @@ class CollectionViewCell: UICollectionViewCell {
             make.edges.equalToSuperview()
         }
 
-       
         
         addSubview(moreButton)
         moreButton.snp.makeConstraints { make in

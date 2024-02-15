@@ -11,7 +11,18 @@ import SnapKit
 class SearchViewController: UIViewController {
     
     
+    struct WeatherLocation {
+        var city:String!
+        var country:String!
+        var countryCode:String!
+    }
     
+    
+    var isFiltering: Bool = false
+    
+    //기록이 있는 사진(피드) 리스트
+    var arr = ["photo1", "photo2"]
+    var filterredArr: [String] = []
     
     let backView: UIView = {
         let view = UIView()
@@ -25,6 +36,22 @@ class SearchViewController: UIViewController {
         return view
         
     }()
+    //searchlistView
+    let tableView = UITableView()
+    
+    //searchView
+    let searchController = UISearchController(searchResultsController: nil)
+    
+    private func setUpSearchController() {
+     
+        tableView.tableHeaderView = searchController.searchBar
+     
+        searchController.searchBar.placeholder = "City or Country"
+        searchController.searchResultsUpdater  = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.searchBarStyle = UISearchBar.Style.prominent
+        searchController.searchBar.sizeToFit()
+    }
     
     //contentView-1
     private let titleContent: UILabel = {
@@ -76,7 +103,6 @@ class SearchViewController: UIViewController {
     }()
     
     //팝업뷰
-    
     @objc func deleteButtonTapped() {
             // 팝업 내용 추가
         // 팝업 띄우기 또는 검색어 삭제 등의 동작 수행
@@ -201,10 +227,12 @@ class SearchViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = backbutton
         let searchBar = UISearchBar()
         searchBar.placeholder = "추억을 찾아드려요"
+        setUpSearchController()
         
         self.navigationItem.titleView = searchBar
         
-
+        //
+        
         
         
         //setUI
@@ -226,6 +254,32 @@ class SearchViewController: UIViewController {
     
 
 }
+
+extension SearchViewController: UISearchResultsUpdating {
+       func filteredContentForSearchText(_ searchText:String){
+           //카테고리 조회 api
+           tableView.reloadData()
+       }
+       
+       func updateSearchResults(for searchController: UISearchController) {
+           filteredContentForSearchText(searchController.searchBar.text ?? "")
+       }
+   }
+
+extension SearchViewController:UITableViewDataSource {
+       func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+           filterredArr.count
+       }
+       
+       func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+           
+           let cell = tableView.dequeueReusableCell(withIdentifier: "SearchListTableViewCell") as! SearchListTableViewCell
+           
+           let keyword = filterredArr[indexPath.row]
+           //cell.textLabel?.text = keyword.
+           return cell
+       }
+   }
 
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
