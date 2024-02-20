@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
-//import PicPick_Resource
-//import PicPick_Util
+import PicPick_Resource
+import PicPick_Util
 import Alamofire
 
 class HomeViewController: UIViewController {
@@ -63,7 +63,6 @@ class HomeViewController: UIViewController {
         
         segment.insertSegment(withTitle: "추억 앨범", at: 0, animated: true)
         segment.insertSegment(withTitle: "함께 앨범", at: 1, animated: true)
-        
         
         segment.selectedSegmentIndex = 0
         

@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import PicPick-Resource
 
 class SearchViewController: UIViewController {
     

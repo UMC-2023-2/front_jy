@@ -36,6 +36,10 @@
 		F4C8476D2B73B6C3006F4F26 /* ImageContainerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C8476C2B73B6C3006F4F26 /* ImageContainerCollectionViewCell.swift */; };
 		F4C847892B74FE89006F4F26 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F4C847882B74FE89006F4F26 /* Alamofire */; };
 		F4C8478C2B7CBEA8006F4F26 /* SearchListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C8478B2B7CBEA8006F4F26 /* SearchListTableViewCell.swift */; };
+		F4E088C12B7E706000056C42 /* PicPick_Resource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E088C02B7E700E00056C42 /* PicPick_Resource.framework */; };
+		F4E088C22B7E706000056C42 /* PicPick_Resource.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F4E088C02B7E700E00056C42 /* PicPick_Resource.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F4E088CA2B7E70BF00056C42 /* PicPick_Util.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E088C92B7E70B400056C42 /* PicPick_Util.framework */; };
+		F4E088CB2B7E70BF00056C42 /* PicPick_Util.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F4E088C92B7E70B400056C42 /* PicPick_Util.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,7 +57,36 @@
 			remoteGlobalIDString = F4C846372B5E82C7006F4F26;
 			remoteInfo = tabbarcustom;
 		};
+		F4E088BF2B7E700E00056C42 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F4E088BB2B7E700E00056C42 /* PicPick-Resource.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B32BB9442B5B5E5D000350DE;
+			remoteInfo = "PicPick-Resource";
+		};
+		F4E088C82B7E70B400056C42 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F4E088C42B7E70B400056C42 /* PicPick-Util.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B32BB96B2B5B6327000350DE;
+			remoteInfo = "PicPick-Util";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F4E088C32B7E706000056C42 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F4E088CB2B7E70BF00056C42 /* PicPick_Util.framework in Embed Frameworks */,
+				F4E088C22B7E706000056C42 /* PicPick_Resource.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		F4C846382B5E82C7006F4F26 /* tabbarcustom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tabbarcustom.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +113,8 @@
 		F4C8476A2B73A27E006F4F26 /* AddPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoViewController.swift; sourceTree = "<group>"; };
 		F4C8476C2B73B6C3006F4F26 /* ImageContainerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageContainerCollectionViewCell.swift; sourceTree = "<group>"; };
 		F4C8478B2B7CBEA8006F4F26 /* SearchListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListTableViewCell.swift; sourceTree = "<group>"; };
+		F4E088BB2B7E700E00056C42 /* PicPick-Resource.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "PicPick-Resource.xcodeproj"; path = "../../../Downloads/PicPick-Resource-main 3/PicPick-Resource.xcodeproj"; sourceTree = "<group>"; };
+		F4E088C42B7E70B400056C42 /* PicPick-Util.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "PicPick-Util.xcodeproj"; path = "../../../Downloads/PicPick-Util-main 3/PicPick-Util.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +122,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4E088CA2B7E70BF00056C42 /* PicPick_Util.framework in Frameworks */,
+				F4E088C12B7E706000056C42 /* PicPick_Resource.framework in Frameworks */,
 				F4C847892B74FE89006F4F26 /* Alamofire in Frameworks */,
 				F4C846702B5E8F5C006F4F26 /* SnapKit in Frameworks */,
 				F4C846732B5E963B006F4F26 /* Tabman in Frameworks */,
@@ -113,6 +150,8 @@
 		F4C8462F2B5E82C7006F4F26 = {
 			isa = PBXGroup;
 			children = (
+				F4E088C42B7E70B400056C42 /* PicPick-Util.xcodeproj */,
+				F4E088BB2B7E700E00056C42 /* PicPick-Resource.xcodeproj */,
 				F4C846762B5EA520006F4F26 /* Font */,
 				F4C8463A2B5E82C7006F4F26 /* tabbarcustom */,
 				F4C846512B5E82C9006F4F26 /* tabbarcustomTests */,
@@ -196,6 +235,22 @@
 			path = HomeViewController;
 			sourceTree = "<group>";
 		};
+		F4E088BC2B7E700E00056C42 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F4E088C02B7E700E00056C42 /* PicPick_Resource.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F4E088C52B7E70B400056C42 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F4E088C92B7E70B400056C42 /* PicPick_Util.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -206,6 +261,7 @@
 				F4C846342B5E82C7006F4F26 /* Sources */,
 				F4C846352B5E82C7006F4F26 /* Frameworks */,
 				F4C846362B5E82C7006F4F26 /* Resources */,
+				F4E088C32B7E706000056C42 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -296,6 +352,16 @@
 			);
 			productRefGroup = F4C846392B5E82C7006F4F26 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = F4E088BC2B7E700E00056C42 /* Products */;
+					ProjectRef = F4E088BB2B7E700E00056C42 /* PicPick-Resource.xcodeproj */;
+				},
+				{
+					ProductGroup = F4E088C52B7E70B400056C42 /* Products */;
+					ProjectRef = F4E088C42B7E70B400056C42 /* PicPick-Util.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				F4C846372B5E82C7006F4F26 /* tabbarcustom */,
@@ -304,6 +370,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		F4E088C02B7E700E00056C42 /* PicPick_Resource.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PicPick_Resource.framework;
+			remoteRef = F4E088BF2B7E700E00056C42 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F4E088C92B7E70B400056C42 /* PicPick_Util.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PicPick_Util.framework;
+			remoteRef = F4E088C82B7E70B400056C42 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		F4C846362B5E82C7006F4F26 /* Resources */ = {
